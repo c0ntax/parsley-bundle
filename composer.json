@@ -1,0 +1,23 @@
+{
+    "name": "c0ntax/parsley-bundle",
+    "version": "0.0.1",
+    "description": "A bridge between Symfony and Parsley.js",
+    "keywords": [
+        "symfony",
+        "bundle",
+        "parsleyjs",
+        "parsley.js"
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Dan Burzynski",
+            "email": "contax@phrenetic.org"
+        }
+    ],
+    "require-dev": {
+        "pds/skeleton": "^1.0"
+    }
+}
