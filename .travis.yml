@@ -6,29 +6,50 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
+php:
+  - '7.1'
+  - '7.2'
+
 matrix:
   fast_finish: true
   include:
     - php: 7.1
+      env: SYMFONY_VERSION=3.4 COVERAGE=true
+    - php: 7.1
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.0.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.1*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.2.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.3.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.1
+      env: SYMFONY_VERSION=4.0.*
     - php: 7.2
-
-env:
-  - SYMFONY_VERSION=2.8.*
-  - SYMFONY_VERSION=3.0.*
-  - SYMFONY_VERSION=3.1.*
-  - SYMFONY_VERSION=3.2.*
-  - SYMFONY_VERSION=3.3.*
-  - SYMFONY_VERSION=3.4.*
-  - SYMFONY_VERSION=4.0.*
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.0.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.1*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.2.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.3.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=4.0.*
 
 before_script:
   - composer self-update
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
-  - composer update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+  - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
-# Run script
-script:
-  - phpunit
+phpunit: if [ "$COVERAGE" == true ]; then phpunit --coverage-text; else phpunit; fi
 
 # After a build, send email notification with the build results
 notifications:
