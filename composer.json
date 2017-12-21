@@ -2,6 +2,13 @@
     "name": "c0ntax/parsley-bundle",
     "version": "0.0.1",
     "description": "A bridge between Symfony and Parsley.js",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Dan Burzynski",
+            "email": "contax@phrenetic.org"
+        }
+    ],
     "keywords": [
         "symfony",
         "bundle",
@@ -10,14 +17,25 @@
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "license": "Apache-2.0",
-    "authors": [
-        {
-            "name": "Dan Burzynski",
-            "email": "contax@phrenetic.org"
+    "autoload": {
+        "psr-4": {
+            "C0ntaX\\ParsleyBundle\\": "src"
         }
-    ],
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "C0ntaX\\ParsleyBundle\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "symfony/validator": "^2.8|^3.0|^4.0",
+        "symfony/form": "^2.8|^3.0|^4.0"
+    },
     "require-dev": {
-        "pds/skeleton": "^1.0"
+        "pds/skeleton": "^1.0",
+        "phpunit/phpunit": "^5.7",
+        "symfony/framework-bundle": "^2.8|^3.0|^4.0",
+        "symfony/phpunit-bridge": "^2.8|^3.0|^4.0"
     }
 }

@@ -1,0 +1,35 @@
+---
+language: php
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1
+    - php: 7.2
+
+env:
+  - SYMFONY_VERSION=2.8.*
+  - SYMFONY_VERSION=3.0.*
+  - SYMFONY_VERSION=3.1.*
+  - SYMFONY_VERSION=3.2.*
+  - SYMFONY_VERSION=3.3.*
+  - SYMFONY_VERSION=3.4.*
+  - SYMFONY_VERSION=4.0.*
+
+before_script:
+  - composer self-update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
+  - composer update
+
+# Run script
+script:
+  - phpunit
+
+# After a build, send email notification with the build results
+notifications:
+  email: contax@phrenetic.org
