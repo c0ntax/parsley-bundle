@@ -47,10 +47,14 @@ matrix:
 before_script:
   - composer self-update
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
-  - composer require --dev php-coveralls/php-coveralls
   - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar
+  - chmod +x php-coveralls.phar
 
-phpunit: if [ "$COVERAGE" == true ]; then phpunit --coverage-text  --coverage-clover build/logs/clover.xml; else phpunit; fi
+after_success:
+  - travis_retry php php-coveralls.phar
+
+phpunit: if [ "$COVERAGE" == true ]; then phpunit --coverage-text --coverage-clover build/logs/clover.xml; else phpunit; fi
 
 # After a build, send email notification with the build results
 notifications:
