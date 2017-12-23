@@ -28,18 +28,27 @@ class ConstraintFactory
         if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
                 // TODO Pick a better message!
-                return new Length($validationConstraint->min, $validationConstraint->max, $validationConstraint->exactMessage);
+                return new Length($validationConstraint->min, $validationConstraint->max, self::convertParameters($validationConstraint->exactMessage));
             } elseif ($validationConstraint->min !== null) {
-                return new MinLength($validationConstraint->min, $validationConstraint->minMessage);
+                return new MinLength($validationConstraint->min, self::convertParameters($validationConstraint->minMessage));
             } else {
-                return new MaxLength($validationConstraint->max, $validationConstraint->maxMessage);
+                return new MaxLength($validationConstraint->max, self::convertParameters($validationConstraint->maxMessage));
             }
         } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Regex) {
-            return new Pattern($validationConstraint->pattern, $validationConstraint->message);
+            return new Pattern($validationConstraint->pattern, self::convertParameters($validationConstraint->message));
         } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Email) {
-            return new Email($validationConstraint->message);
+            return new Email(self::convertParameters($validationConstraint->message));
         }
 
         throw new \RuntimeException('Unsupported Symfony Constraint: '.get_class($validationConstraint));
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    private static function convertParameters(string $string): string
+    {
+        return preg_replace('/\{\{ [^\s]+ \}\}/', '%s', $string);
     }
 }

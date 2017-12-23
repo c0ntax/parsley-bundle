@@ -1,0 +1,9 @@
+parameters:
+    locale: en
+
+framework:
+    test: ~
+    validation:
+        enable_annotations: true
+        enabled: true
+

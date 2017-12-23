@@ -5,6 +5,7 @@ namespace C0ntax\ParsleyBundle\Tests\Factory;
 use C0ntaX\ParsleyBundle\Constraint\Pattern;
 use C0ntaX\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntaX\ParsleyBundle\Factory\ConstraintFactory;
+use C0ntaX\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
@@ -19,6 +20,15 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateFromValidationConstraint(Constraint $constraint, ConstraintInterface $expected)
     {
         self::assertEquals($expected, ConstraintFactory::createFromValidationConstraint($constraint));
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage Unsupported Symfony Constraint: C0ntaX\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint
+     */
+    public function testCreateFromValidationConstraintException()
+    {
+        ConstraintFactory::createFromValidationConstraint(new UnknownConstraint());
     }
 
     public function getFactoryTestData()
