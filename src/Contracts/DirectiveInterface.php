@@ -1,11 +1,11 @@
 <?php
 
-namespace C0ntaX\ParsleyBundle\Contracts;
+namespace C0ntax\ParsleyBundle\Contracts;
 
 /**
  * Interface DirectiveInterface
  *
- * @package C0ntaX\ParsleyBundle\Contracts
+ * @package C0ntax\ParsleyBundle\Contracts
  */
 interface DirectiveInterface
 {

@@ -1,8 +1,9 @@
 services:
     c0ntax_parsley.form.extension.parsley:
-        class: C0ntaX\ParsleyBundle\Form\Extension\ParsleyTypeExtension
+        class: C0ntax\ParsleyBundle\Form\Extension\ParsleyTypeExtension
         arguments:
             - '%c0ntax_parsley%'
             - '@validator'
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+        public: true

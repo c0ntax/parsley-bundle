@@ -1,8 +1,8 @@
 <?php
 
-namespace C0ntaX\ParsleyBundle\Tests\Form;
+namespace C0ntax\ParsleyBundle\Tests\Form;
 
-use C0ntaX\ParsleyBundle\Form\Extension\ParsleyTypeExtension;
+use C0ntax\ParsleyBundle\Form\Extension\ParsleyTypeExtension;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Test\TypeTestCase;

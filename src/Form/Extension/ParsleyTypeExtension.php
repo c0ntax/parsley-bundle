@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace C0ntaX\ParsleyBundle\Form\Extension;
+namespace C0ntax\ParsleyBundle\Form\Extension;
 
-use C0ntaX\ParsleyBundle\Contracts\ConstraintInterface;
-use C0ntaX\ParsleyBundle\Contracts\DirectiveInterface;
-use C0ntaX\ParsleyBundle\Factory\ConstraintFactory;
+use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
+use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
+use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;

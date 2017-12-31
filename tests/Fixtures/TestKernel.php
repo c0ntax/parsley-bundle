@@ -1,5 +1,7 @@
 <?php
 
+namespace C0ntax\ParsleyBundle\Tests\Fixtures;
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -11,8 +13,8 @@ class TestKernel extends Kernel
     public function registerBundles()
     {
         return [
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \C0ntax\ParsleyBundle\C0ntaxParsleyBundle(),
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
         ];
     }
 

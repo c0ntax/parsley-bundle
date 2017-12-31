@@ -2,8 +2,8 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Form\Extension;
 
-use C0ntaX\ParsleyBundle\Tests\Fixtures\Form\Type\TestType;
-use C0ntaX\ParsleyBundle\Tests\Form\AbstractTypeTestCase;
+use C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type\TestType;
+use C0ntax\ParsleyBundle\Tests\Form\AbstractTypeTestCase;
 use Symfony\Component\Form\FormInterface;
 
 class ParsleyTypeExtensionTest extends AbstractTypeTestCase

@@ -19,12 +19,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "C0ntaX\\ParsleyBundle\\": "src"
+            "C0ntax\\ParsleyBundle\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "C0ntaX\\ParsleyBundle\\Tests\\": "tests"
+            "C0ntax\\ParsleyBundle\\Tests\\": "tests"
         }
     },
     "require": {
@@ -38,6 +38,7 @@
         "symfony/framework-bundle": "^2.8|^3.0|^4.0",
         "symfony/phpunit-bridge": "^2.8|^3.0|^4.0",
         "symfony/var-dumper": "^2.8|^3.0|^4.0",
-        "doctrine/annotations": "^1.6"
+        "doctrine/annotations": "^1.6",
+        "matthiasnoback/symfony-config-test": "^2.0"
     }
 }

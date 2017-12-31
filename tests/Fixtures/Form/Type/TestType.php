@@ -1,11 +1,11 @@
 <?php
 
-namespace C0ntaX\ParsleyBundle\Tests\Fixtures\Form\Type;
+namespace C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type;
 
-use C0ntaX\ParsleyBundle\Constraint\MaxLength;
-use C0ntaX\ParsleyBundle\Constraint\MinLength;
-use C0ntaX\ParsleyBundle\Directive\ConstraintErrorMessage;
-use C0ntaX\ParsleyBundle\Tests\Fixtures\Entity\TestEntity;
+use C0ntax\ParsleyBundle\Constraint\MaxLength;
+use C0ntax\ParsleyBundle\Constraint\MinLength;
+use C0ntax\ParsleyBundle\Directive\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Tests\Fixtures\Entity\TestEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

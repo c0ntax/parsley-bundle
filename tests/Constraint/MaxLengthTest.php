@@ -2,7 +2,7 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Constraint;
 
-use C0ntaX\ParsleyBundle\Constraint\MaxLength;
+use C0ntax\ParsleyBundle\Constraint\MaxLength;
 
 class MaxLengthTest extends \PHPUnit_Framework_TestCase
 {

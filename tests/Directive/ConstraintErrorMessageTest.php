@@ -2,8 +2,8 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Directive;
 
-use C0ntaX\ParsleyBundle\Constraint\Pattern;
-use C0ntaX\ParsleyBundle\Directive\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Directive\ConstraintErrorMessage;
 
 class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage not a class is not a class and therefore doesn't impliment C0ntaX\ParsleyBundle\Contracts\ConstraintInterface
+     * @expectedExceptionMessage not a class is not a class and therefore doesn't impliment C0ntax\ParsleyBundle\Contracts\ConstraintInterface
      */
     public function testGetViewAttrFail1()
     {
@@ -31,7 +31,7 @@ class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Class C0ntax\ParsleyBundle\Tests\Directive\ConstraintErrorMessageTest does not implement C0ntaX\ParsleyBundle\Contracts\ConstraintInterface
+     * @expectedExceptionMessage Class C0ntax\ParsleyBundle\Tests\Directive\ConstraintErrorMessageTest does not implement C0ntax\ParsleyBundle\Contracts\ConstraintInterface
      */
     public function testGetViewAttrFail2()
     {

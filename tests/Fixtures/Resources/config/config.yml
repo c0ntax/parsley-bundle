@@ -1,5 +1,6 @@
 parameters:
     locale: en
+    kernel.secret: oiwejfoiewj
 
 framework:
     test: ~
@@ -7,3 +8,7 @@ framework:
         enable_annotations: true
         enabled: true
 
+c0ntax_parsley:
+    enabled: true
+    field:
+        trigger: focusout

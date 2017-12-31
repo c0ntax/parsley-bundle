@@ -2,7 +2,7 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Constraint;
 
-use C0ntaX\ParsleyBundle\Constraint\MinLength;
+use C0ntax\ParsleyBundle\Constraint\MinLength;
 
 class MinLengthTest extends \PHPUnit_Framework_TestCase
 {

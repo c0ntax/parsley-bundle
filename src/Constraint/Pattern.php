@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace C0ntaX\ParsleyBundle\Constraint;
+namespace C0ntax\ParsleyBundle\Constraint;
 
 /**
  * Class Pattern
  *
- * @package C0ntaX\ParsleyBundle\Constraint
+ * @package C0ntax\ParsleyBundle\Constraint
  */
 class Pattern extends AbstractConstraint
 {

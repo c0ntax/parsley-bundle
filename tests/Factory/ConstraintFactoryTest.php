@@ -2,10 +2,10 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Factory;
 
-use C0ntaX\ParsleyBundle\Constraint\Pattern;
-use C0ntaX\ParsleyBundle\Contracts\ConstraintInterface;
-use C0ntaX\ParsleyBundle\Factory\ConstraintFactory;
-use C0ntaX\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint;
+use C0ntax\ParsleyBundle\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
+use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
+use C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
@@ -24,7 +24,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \RuntimeException
-     * @expectedExceptionMessage Unsupported Symfony Constraint: C0ntaX\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint
+     * @expectedExceptionMessage Unsupported Symfony Constraint: C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint
      */
     public function testCreateFromValidationConstraintException()
     {
@@ -51,7 +51,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'exactMessage' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntaX\ParsleyBundle\Constraint\Length(1, 20, 'This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Constraint\Length(1, 20, 'This doesn\'t look right'),
             ],
             [
                 new Length(
@@ -60,7 +60,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'minMessage' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntaX\ParsleyBundle\Constraint\MinLength(1, 'This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Constraint\MinLength(1, 'This doesn\'t look right'),
             ],
             [
                 new Length(
@@ -69,7 +69,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'maxMessage' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntaX\ParsleyBundle\Constraint\MaxLength(20, 'This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Constraint\MaxLength(20, 'This doesn\'t look right'),
             ],
             [
                 new Email(
@@ -77,7 +77,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'message' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntaX\ParsleyBundle\Constraint\Email('This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Constraint\Email('This doesn\'t look right'),
             ],
         ];
     }

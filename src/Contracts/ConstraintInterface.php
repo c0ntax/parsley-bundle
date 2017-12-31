@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace C0ntaX\ParsleyBundle\Contracts;
+namespace C0ntax\ParsleyBundle\Contracts;
 
-use C0ntaX\ParsleyBundle\Directive\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Directive\ConstraintErrorMessage;
 
 /**
  * Interface ConstraintInterface
  *
- * @package C0ntaX\ParsleyBundle\Constraint
+ * @package C0ntax\ParsleyBundle\Constraint
  */
 interface ConstraintInterface extends DirectiveInterface
 {

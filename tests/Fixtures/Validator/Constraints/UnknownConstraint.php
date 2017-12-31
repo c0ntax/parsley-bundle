@@ -1,6 +1,6 @@
 <?php
 
-namespace C0ntaX\ParsleyBundle\Tests\Fixtures\Validator\Constraints;
+namespace C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 

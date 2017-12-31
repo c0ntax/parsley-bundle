@@ -2,7 +2,7 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Constraint;
 
-use C0ntaX\ParsleyBundle\Constraint\Email;
+use C0ntax\ParsleyBundle\Constraint\Email;
 
 class EmailTest extends \PHPUnit_Framework_TestCase
 {

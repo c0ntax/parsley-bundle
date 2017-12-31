@@ -1,4 +1,0 @@
-c0ntax_parsley:
-    enabled: true
-    field:
-        trigger: focusout

@@ -2,7 +2,7 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Constraint;
 
-use C0ntaX\ParsleyBundle\Constraint\Length;
+use C0ntax\ParsleyBundle\Constraint\Length;
 
 class LengthTest extends \PHPUnit_Framework_TestCase
 {

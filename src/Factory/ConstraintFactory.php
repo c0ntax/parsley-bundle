@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace C0ntaX\ParsleyBundle\Factory;
+namespace C0ntax\ParsleyBundle\Factory;
 
-use C0ntaX\ParsleyBundle\Constraint\Email;
-use C0ntaX\ParsleyBundle\Constraint\Length;
-use C0ntaX\ParsleyBundle\Constraint\MaxLength;
-use C0ntaX\ParsleyBundle\Constraint\MinLength;
-use C0ntaX\ParsleyBundle\Constraint\Pattern;
-use C0ntaX\ParsleyBundle\Contracts\ConstraintInterface;
+use C0ntax\ParsleyBundle\Constraint\Email;
+use C0ntax\ParsleyBundle\Constraint\Length;
+use C0ntax\ParsleyBundle\Constraint\MaxLength;
+use C0ntax\ParsleyBundle\Constraint\MinLength;
+use C0ntax\ParsleyBundle\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * Class ConstraintFactory
  *
- * @package C0ntaX\ParsleyBundle\Constraint
+ * @package C0ntax\ParsleyBundle\Constraint
  */
 class ConstraintFactory
 {

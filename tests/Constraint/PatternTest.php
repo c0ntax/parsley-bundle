@@ -2,7 +2,7 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Constraint;
 
-use C0ntaX\ParsleyBundle\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Constraint\Pattern;
 
 class PatternTest extends \PHPUnit_Framework_TestCase
 {
