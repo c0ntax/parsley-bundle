@@ -53,7 +53,7 @@ class ConstraintErrorMessage implements DirectiveInterface
     private function getConstraintIdFromClass(string $class): string
     {
         if (!class_exists($class)) {
-            throw new \InvalidArgumentException($class.' is not a class and therefore doesn\'t impliment '.ConstraintInterface::class);
+            throw new \InvalidArgumentException($class.' is not a class and therefore doesn\'t implement '.ConstraintInterface::class);
         }
 
         if (array_key_exists(ConstraintInterface::class, class_implements($class))) {
