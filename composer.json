@@ -1,8 +1,10 @@
 {
     "name": "c0ntax/parsley-bundle",
     "version": "0.1.0",
+    "type": "symfony-bundle",
     "description": "A bridge between Symfony and Parsley.js",
     "license": "Apache-2.0",
+    "homepage": "https://github.com/c0ntax/parsley-bundle",
     "authors": [
         {
             "name": "Dan Burzynski",
