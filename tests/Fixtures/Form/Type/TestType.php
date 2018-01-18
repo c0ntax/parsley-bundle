@@ -2,9 +2,9 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type;
 
-use C0ntax\ParsleyBundle\Constraint\MaxLength;
-use C0ntax\ParsleyBundle\Constraint\MinLength;
-use C0ntax\ParsleyBundle\Directive\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
+use C0ntax\ParsleyBundle\Directive\Field\ConstraintErrorMessage;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Entity\TestEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

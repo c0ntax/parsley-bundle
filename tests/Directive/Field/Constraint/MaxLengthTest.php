@@ -1,8 +1,8 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Tests\Constraint;
+namespace C0ntax\ParsleyBundle\Tests\Directive\Field\Constraint;
 
-use C0ntax\ParsleyBundle\Constraint\MaxLength;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
 
 class MaxLengthTest extends \PHPUnit_Framework_TestCase
 {

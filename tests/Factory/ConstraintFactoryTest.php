@@ -2,8 +2,8 @@
 
 namespace C0ntax\ParsleyBundle\Tests\Factory;
 
-use C0ntax\ParsleyBundle\Constraint\Pattern;
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint;
 use Symfony\Component\Validator\Constraint;
@@ -51,7 +51,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'exactMessage' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntax\ParsleyBundle\Constraint\Length(1, 20, 'This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Length(1, 20, 'This doesn\'t look right'),
             ],
             [
                 new Length(
@@ -60,7 +60,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'minMessage' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntax\ParsleyBundle\Constraint\MinLength(1, 'This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength(1, 'This doesn\'t look right'),
             ],
             [
                 new Length(
@@ -69,7 +69,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'maxMessage' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntax\ParsleyBundle\Constraint\MaxLength(20, 'This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength(20, 'This doesn\'t look right'),
             ],
             [
                 new Email(
@@ -77,7 +77,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                         'message' => 'This doesn\'t look right',
                     ]
                 ),
-                new \C0ntax\ParsleyBundle\Constraint\Email('This doesn\'t look right'),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Email('This doesn\'t look right'),
             ],
         ];
     }

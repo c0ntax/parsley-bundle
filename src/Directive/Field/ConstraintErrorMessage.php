@@ -1,10 +1,10 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Directive;
+namespace C0ntax\ParsleyBundle\Directive\Field;
 
-use C0ntax\ParsleyBundle\Constraint\AbstractConstraint;
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\AbstractConstraint;
 
 /**
  * Class ErrorMessage

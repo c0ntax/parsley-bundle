@@ -3,18 +3,18 @@ declare(strict_types=1);
 
 namespace C0ntax\ParsleyBundle\Factory;
 
-use C0ntax\ParsleyBundle\Constraint\Email;
-use C0ntax\ParsleyBundle\Constraint\Length;
-use C0ntax\ParsleyBundle\Constraint\MaxLength;
-use C0ntax\ParsleyBundle\Constraint\MinLength;
-use C0ntax\ParsleyBundle\Constraint\Pattern;
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Email;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Length;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * Class ConstraintFactory
  *
- * @package C0ntax\ParsleyBundle\Constraint
+ * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
  */
 class ConstraintFactory
 {

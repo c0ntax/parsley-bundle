@@ -67,7 +67,7 @@ For reasons that I can't quite imagine, you might only want to just add client s
                 TextType::class,
                 [
                     'parsleys' => [
-                        new \C0ntax\ParsleyBundle\Constraint\MinLength(2, 'You need more than %s chars'),
+                        new \C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength(2, 'You need more than %s chars'),
                     ],
                 ]
             )
@@ -136,7 +136,7 @@ Let's assume that the Entity in the example above is out of your control. It's c
                 TextType::class,
                 [
                     'parsleys' => [
-                        new \C0ntax\ParsleyBundle\Directive\ConstraintErrorMessage(\C0ntax\ParsleyBundle\Constraint\MinLength::class, 'You need more than %s chars'),
+                        new \C0ntax\ParsleyBundle\Directive\Field\ConstraintErrorMessage(\C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength::class, 'You need more than %s chars'),
                     ],
                 ]
             )
