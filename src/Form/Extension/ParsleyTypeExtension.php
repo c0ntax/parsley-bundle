@@ -5,6 +5,7 @@ namespace C0ntax\ParsleyBundle\Form\Extension;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
+use C0ntax\ParsleyBundle\Directive\Field\Generic;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -120,7 +121,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     {
         $attr = [];
         if (count($directives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
-            $attr['data-parsley-trigger'] = $this->getConfig()['field']['trigger'];
+            $directives[] = new Generic('trigger', $this->getConfig()['field']['trigger']);
         }
         foreach ($directives as $constraint) {
             foreach ($constraint->getViewAttr() as $key => $value) {
