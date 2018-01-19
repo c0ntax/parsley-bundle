@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
 
@@ -18,6 +18,7 @@ class Pattern extends AbstractConstraint
      *
      * @param string      $pattern
      * @param string|null $errorMessage
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $pattern, string $errorMessage = null)
     {

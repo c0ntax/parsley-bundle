@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
 
@@ -15,6 +15,7 @@ class MinLength extends AbstractLength
      *
      * @param int|null    $min
      * @param string|null $errorMessage
+     * @throws \InvalidArgumentException
      */
     public function __construct(int $min, string $errorMessage = null)
     {

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
 
@@ -29,6 +29,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * @param string $errorMessage
      * @return AbstractConstraint
+     * @throws \InvalidArgumentException
      */
     protected function setErrorMessageString(?string $errorMessage): AbstractConstraint
     {

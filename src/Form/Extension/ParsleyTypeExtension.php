@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Form\Extension;
 
@@ -89,6 +89,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     /**
      * @param Constraint[] $validationConstraints
      * @return ConstraintInterface[]
+     * @throws \InvalidArgumentException
      */
     private function createParsleyConstraintsFromValidationConstraints(array $validationConstraints): array
     {
