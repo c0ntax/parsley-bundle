@@ -8,7 +8,11 @@ use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\LessThan;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\Regex;
 
 class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
@@ -78,6 +82,63 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
                     ]
                 ),
                 new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Email('This doesn\'t look right'),
+            ],
+
+            // Max 'n' Min (integer)
+
+            [
+                new GreaterThanOrEqual(['value' => 10, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Min(10, 'Ouch'),
+            ],
+            [
+                new GreaterThan(['value' => 10, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Min(11, 'Ouch'),
+            ],
+            [
+                new LessThanOrEqual(['value' => 10, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Max(10, 'Ouch'),
+            ],
+            [
+                new LessThan(['value' => 10, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Max(9, 'Ouch'),
+            ],
+
+            // Max 'n' Min (float)
+
+            [
+                new GreaterThanOrEqual(['value' => 10.0, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Min(10, 'Ouch'),
+            ],
+            [
+                new GreaterThan(['value' => 10.0, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Min(10.0000001, 'Ouch'),
+            ],
+            [
+                new LessThanOrEqual(['value' => 10.0, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Max(10, 'Ouch'),
+            ],
+            [
+                new LessThan(['value' => 10.0, 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Max(9.9999999, 'Ouch'),
+            ],
+
+            // Max 'n' Min (DateTime)
+
+            [
+                new GreaterThanOrEqual(['value' => '2018-01-19', 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Min('2018-01-19 00:00:00', 'Ouch'),
+            ],
+            [
+                new GreaterThan(['value' => '2018-01-19', 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Min('2018-01-19 00:00:01', 'Ouch'),
+            ],
+            [
+                new LessThanOrEqual(['value' => '2018-01-19', 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Max('2018-01-19 00:00:00', 'Ouch'),
+            ],
+            [
+                new LessThan(['value' => '2018-01-19', 'message' => 'Ouch']),
+                new \C0ntax\ParsleyBundle\Directive\Field\Constraint\Max('2018-01-18 23:59:59', 'Ouch'),
             ],
         ];
     }

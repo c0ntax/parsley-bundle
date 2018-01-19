@@ -51,6 +51,8 @@ Since this library is very much alpha, I haven't had time to add all the [valida
 * MaxLength
 * MinLength
 * Pattern
+* Max
+* Min
 
 ## Usage
 
