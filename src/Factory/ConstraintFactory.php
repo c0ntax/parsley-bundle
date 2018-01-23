@@ -26,7 +26,8 @@ use Symfony\Component\Validator\Constraints\AbstractComparison;
 class ConstraintFactory
 {
     /**
-     * @param Constraint $validationConstraint
+     * @param Constraint    $validationConstraint
+     * @param FormInterface $form
      * @return ConstraintInterface
      * @throws \Exception
      * @throws \InvalidArgumentException
