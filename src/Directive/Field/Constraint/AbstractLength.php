@@ -1,12 +1,12 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
-namespace C0ntax\ParsleyBundle\Constraint;
+namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
 
 /**
  * Class AbstractLength
  *
- * @package C0ntax\ParsleyBundle\Constraint
+ * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
  */
 abstract class AbstractLength extends AbstractConstraint
 {
@@ -22,6 +22,7 @@ abstract class AbstractLength extends AbstractConstraint
      * @param int|null    $min
      * @param int|null    $max
      * @param string|null $errorMessage
+     * @throws \InvalidArgumentException
      */
     public function __construct(int $min = null, int $max = null, string $errorMessage = null)
     {

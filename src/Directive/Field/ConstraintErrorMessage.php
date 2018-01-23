@@ -1,10 +1,10 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Directive;
+namespace C0ntax\ParsleyBundle\Directive\Field;
 
-use C0ntax\ParsleyBundle\Constraint\AbstractConstraint;
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\AbstractConstraint;
 
 /**
  * Class ErrorMessage
@@ -53,7 +53,9 @@ class ConstraintErrorMessage implements DirectiveInterface
     private function getConstraintIdFromClass(string $class): string
     {
         if (!class_exists($class)) {
-            throw new \InvalidArgumentException($class.' is not a class and therefore doesn\'t implement '.ConstraintInterface::class);
+            throw new \InvalidArgumentException(
+                $class.' is not a class and therefore doesn\'t implement '.ConstraintInterface::class
+            );
         }
 
         if (array_key_exists(ConstraintInterface::class, class_implements($class))) {

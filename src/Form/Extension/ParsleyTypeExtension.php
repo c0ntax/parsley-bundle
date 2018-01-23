@@ -1,10 +1,11 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Form\Extension;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
+use C0ntax\ParsleyBundle\Directive\Field\Generic;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -57,7 +58,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
         );
 
         $parsleyConstraints = array_merge(
-            $this->createParsleyConstraintsFromValidationConstraints($constraints),
+            $this->createParsleyConstraintsFromValidationConstraints($constraints, $form),
             $options[self::OPTION_NAME]
         );
 
@@ -86,17 +87,23 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @param Constraint[] $validationConstraints
+     * @param Constraint[]  $validationConstraints
+     * @param FormInterface $form
      * @return ConstraintInterface[]
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
-    private function createParsleyConstraintsFromValidationConstraints(array $validationConstraints): array
-    {
+    private function createParsleyConstraintsFromValidationConstraints(
+        array $validationConstraints,
+        FormInterface $form
+    ): array {
         $out = [];
         foreach ($validationConstraints as $validationConstraint) {
             try {
-                $out[] = ConstraintFactory::createFromValidationConstraint($validationConstraint);
+                $out[] = ConstraintFactory::createFromValidationConstraint($validationConstraint, $form);
             } catch (\RuntimeException $exception) {
                 // Don't care for now!
+                // TODO How loud this should be should be configurable
             }
         }
 
@@ -120,7 +127,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     {
         $attr = [];
         if (count($directives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
-            $attr['data-parsley-trigger'] = $this->getConfig()['field']['trigger'];
+            $directives[] = new Generic('trigger', $this->getConfig()['field']['trigger']);
         }
         foreach ($directives as $constraint) {
             foreach ($constraint->getViewAttr() as $key => $value) {

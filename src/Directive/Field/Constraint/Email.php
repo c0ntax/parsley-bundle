@@ -1,12 +1,12 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
-namespace C0ntax\ParsleyBundle\Constraint;
+namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
 
 /**
  * Class Email
  *
- * @package C0ntax\ParsleyBundle\Constraint
+ * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
  */
 class Email extends AbstractConstraint
 {
@@ -14,6 +14,7 @@ class Email extends AbstractConstraint
      * Email constructor.
      *
      * @param string|null $errorMessage
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $errorMessage = null)
     {
