@@ -23,7 +23,7 @@ abstract class AbstractComparison extends AbstractConstraint
     public function __construct($min, string $errorMessage = null)
     {
         $this->setValue($min);
-        $this->setErrorMessageString($errorMessage);
+        parent::__construct($errorMessage);
     }
 
     /**

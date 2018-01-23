@@ -1,21 +1,20 @@
 <?php
-declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
 
 /**
- * Class Email
+ * Class Required
  *
  * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
  */
-class Email extends AbstractConstraint
+class Required extends AbstractConstraint
 {
     /**
      * @return string
      */
     public static function getConstraintId(): string
     {
-        return 'type';
+        return 'required';
     }
 
     /**
@@ -23,6 +22,6 @@ class Email extends AbstractConstraint
      */
     public function getViewAttr(): array
     {
-        return $this->getMergedViewAttr('email');
+        return $this->getMergedViewAttr('true');
     }
 }

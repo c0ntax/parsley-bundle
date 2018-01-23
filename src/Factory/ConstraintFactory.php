@@ -11,6 +11,7 @@ use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Min;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Required;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -37,7 +38,13 @@ class ConstraintFactory
         Constraint $validationConstraint,
         FormInterface $form
     ): ConstraintInterface {
-        if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
+        // TODO Change this to use the ViewInterface instead of the FormInterface as that makes a lot more sense!
+
+        if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotNull) {
+            return new Required($validationConstraint->message);
+        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotBlank) {
+            return new Required($validationConstraint->message);
+        } if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
                 // TODO Pick a better message!
                 return new Length(

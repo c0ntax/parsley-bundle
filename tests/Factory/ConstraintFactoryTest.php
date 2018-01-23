@@ -4,6 +4,7 @@ namespace C0ntax\ParsleyBundle\Tests\Factory;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Required;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use C0ntax\ParsleyBundle\Form\Extension\ParsleyTypeExtension;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type\TestType;
@@ -19,6 +20,8 @@ use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\LessThan;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -63,6 +66,18 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
         $form = $factory->create(TestType::class, null, []);
 
         return [
+            [
+                new NotNull(['message' => 'Give me something']),
+                $form->get('id'),
+                new Required('Give me something'),
+                'NotNull to Required',
+            ],
+            [
+                new NotBlank(['message' => 'Give me something']),
+                $form->get('id'),
+                new Required('Give me something'),
+                'NotBlank to Required',
+            ],
             [
                 new Regex(
                     [
