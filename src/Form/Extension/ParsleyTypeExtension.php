@@ -100,7 +100,10 @@ class ParsleyTypeExtension extends AbstractTypeExtension
         $out = [];
         foreach ($validationConstraints as $validationConstraint) {
             try {
-                $out[] = ConstraintFactory::createFromValidationConstraint($validationConstraint, $form);
+                $parsleyConstraint = ConstraintFactory::createFromValidationConstraint($validationConstraint, $form);
+                if ($parsleyConstraint !== null) {
+                    $out[] = $parsleyConstraint;
+                }
             } catch (\RuntimeException $exception) {
                 // Don't care for now!
                 // TODO How loud this should be should be configurable

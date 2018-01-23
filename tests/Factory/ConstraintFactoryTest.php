@@ -23,6 +23,7 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -66,6 +67,12 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
         $form = $factory->create(TestType::class, null, []);
 
         return [
+            [
+                new Valid(),
+                $form->get('id'),
+                null,
+                'Valid to Null',
+            ],
             [
                 new NotNull(['message' => 'Give me something']),
                 $form->get('id'),

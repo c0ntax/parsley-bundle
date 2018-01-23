@@ -29,7 +29,7 @@ class ConstraintFactory
     /**
      * @param Constraint    $validationConstraint
      * @param FormInterface $form
-     * @return ConstraintInterface
+     * @return ConstraintInterface|null
      * @throws \Exception
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
@@ -37,10 +37,13 @@ class ConstraintFactory
     public static function createFromValidationConstraint(
         Constraint $validationConstraint,
         FormInterface $form
-    ): ConstraintInterface {
+    ): ?ConstraintInterface {
         // TODO Change this to use the ViewInterface instead of the FormInterface as that makes a lot more sense!
 
-        if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotNull) {
+        if ($validationConstraint instanceof  \Symfony\Component\Validator\Constraints\Valid) {
+            // This case is not an error. There just isn't a 'like-for-like' replacement
+            return null;
+        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotNull) {
             return new Required($validationConstraint->message);
         } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotBlank) {
             return new Required($validationConstraint->message);
