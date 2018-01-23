@@ -23,7 +23,7 @@ class Pattern extends AbstractConstraint
     public function __construct(string $pattern, string $errorMessage = null)
     {
         $this->setPattern($pattern);
-        $this->setErrorMessageString($errorMessage);
+        parent::__construct($errorMessage);
     }
 
     /**

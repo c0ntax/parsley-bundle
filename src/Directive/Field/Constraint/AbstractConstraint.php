@@ -19,6 +19,17 @@ abstract class AbstractConstraint implements ConstraintInterface
     private $errorMessage;
 
     /**
+     * AbstractConstraint constructor.
+     *
+     * @param null|string $errorMessageString
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(string $errorMessageString = null)
+    {
+        $this->setErrorMessageString($errorMessageString);
+    }
+
+    /**
      * @return null|ConstraintErrorMessage
      */
     public function getErrorMessage(): ?ConstraintErrorMessage

@@ -11,6 +11,7 @@ use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Min;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint\Required;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -26,15 +27,27 @@ use Symfony\Component\Validator\Constraints\AbstractComparison;
 class ConstraintFactory
 {
     /**
-     * @param Constraint $validationConstraint
-     * @return ConstraintInterface
+     * @param Constraint    $validationConstraint
+     * @param FormInterface $form
+     * @return ConstraintInterface|null
      * @throws \Exception
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public static function createFromValidationConstraint(Constraint $validationConstraint, FormInterface $form): ConstraintInterface
-    {
-        if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
+    public static function createFromValidationConstraint(
+        Constraint $validationConstraint,
+        FormInterface $form
+    ): ?ConstraintInterface {
+        // TODO Change this to use the ViewInterface instead of the FormInterface as that makes a lot more sense!
+
+        if ($validationConstraint instanceof  \Symfony\Component\Validator\Constraints\Valid) {
+            // This case is not an error. There just isn't a 'like-for-like' replacement
+            return null;
+        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotNull) {
+            return new Required($validationConstraint->message);
+        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotBlank) {
+            return new Required($validationConstraint->message);
+        } if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
                 // TODO Pick a better message!
                 return new Length(
@@ -64,7 +77,7 @@ class ConstraintFactory
 
             $innerType = $form->getConfig()->getType()->getInnerType();
 
-            if (is_string($validationConstraint->value) && !($innerType instanceof DateType || $innerType instanceof BirthdayType || $innerType instanceof DateTimeType)) {
+            if (is_string($validationConstraint->value) && !static::isFormHtml5DateType($form)) {
                 throw new \RuntimeException('Date evaluation called on a non-DateType field: '.$form->getName());
             }
 
@@ -94,8 +107,29 @@ class ConstraintFactory
 
         }
 
-
         throw new \RuntimeException('Unsupported Symfony Constraint: '.get_class($validationConstraint));
+    }
+
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
+    private static function isFormHtml5DateType(FormInterface $form): bool
+    {
+        $innerType = $form->getConfig()->getType()->getInnerType();
+        $options = $form->getConfig()->getOptions();
+
+        // NOTE: Code below shamelessly lifted from the DateType and DateTimeType view methods as this seems to be
+        // the only way to tell if a field is going to be rendered as type="date|datetime"
+
+        $isHtml5 = false;
+        if ($innerType instanceof DateType || $innerType instanceof BirthdayType) {
+            $isHtml5 = $options['html5'] && 'single_text' === $options['widget'] && DateType::HTML5_FORMAT === $options['format'];
+        } elseif ($innerType instanceof DateTimeType) {
+            $isHtml5 = $options['html5'] && 'single_text' === $options['widget'] && DateTimeType::HTML5_FORMAT === $options['format'];
+        }
+
+        return $isHtml5;
     }
 
     /**

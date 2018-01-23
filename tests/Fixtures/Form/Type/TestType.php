@@ -9,6 +9,8 @@ use C0ntax\ParsleyBundle\Tests\Fixtures\Entity\TestEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,11 +34,38 @@ class TestType extends AbstractType
             )
             ->add(
                 'date',
-                DateType::class
+                DateType::class,
+                [
+                    'html5' => true,
+                    'widget' => 'single_text',
+                    'format' => DateType::HTML5_FORMAT,
+                ]
             )
             ->add(
                 'dob',
-                BirthdayType::class
+                BirthdayType::class,
+                [
+                    'html5' => true,
+                    'widget' => 'single_text',
+                    'format' => DateType::HTML5_FORMAT,
+                ]
+            )
+            ->add(
+                'dateNotHtml5',
+                DateType::class,
+                [
+                    'html5' => false,
+                    'widget' => 'single_text',
+                    'format' => DateType::HTML5_FORMAT,
+                ]
+            )
+            ->add(
+                'int',
+                IntegerType::class
+            )
+            ->add(
+                'float',
+                NumberType::class
             )
 //            ->add('email', TextType::class)
 //            ->add('string', TextType::class, ['constraints' => [new NotBlank()]])

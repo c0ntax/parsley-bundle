@@ -28,7 +28,7 @@ abstract class AbstractLength extends AbstractConstraint
     {
         $this->setMin($min);
         $this->setMax($max);
-        $this->setErrorMessageString($errorMessage);
+        parent::__construct($errorMessage);
     }
 
     /**
