@@ -32,8 +32,10 @@ class ConstraintFactory
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public static function createFromValidationConstraint(Constraint $validationConstraint, FormInterface $form): ConstraintInterface
-    {
+    public static function createFromValidationConstraint(
+        Constraint $validationConstraint,
+        FormInterface $form
+    ): ConstraintInterface {
         if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
                 // TODO Pick a better message!
@@ -64,7 +66,7 @@ class ConstraintFactory
 
             $innerType = $form->getConfig()->getType()->getInnerType();
 
-            if (is_string($validationConstraint->value) && !($innerType instanceof DateType || $innerType instanceof BirthdayType || $innerType instanceof DateTimeType)) {
+            if (is_string($validationConstraint->value) && !static::isFormHtml5DateType($form)) {
                 throw new \RuntimeException('Date evaluation called on a non-DateType field: '.$form->getName());
             }
 
@@ -94,8 +96,29 @@ class ConstraintFactory
 
         }
 
-
         throw new \RuntimeException('Unsupported Symfony Constraint: '.get_class($validationConstraint));
+    }
+
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
+    private static function isFormHtml5DateType(FormInterface $form): bool
+    {
+        $innerType = $form->getConfig()->getType()->getInnerType();
+        $options = $form->getConfig()->getOptions();
+
+        // NOTE: Code below shamelessly lifted from the DateType and DateTimeType view methods as this seems to be
+        // the only way to tell if a field is going to be rendered as type="date|datetime"
+
+        $isHtml5 = false;
+        if ($innerType instanceof DateType || $innerType instanceof BirthdayType) {
+            $isHtml5 = $options['html5'] && 'single_text' === $options['widget'] && DateType::HTML5_FORMAT === $options['format'];
+        } elseif ($innerType instanceof DateTimeType) {
+            $isHtml5 = $options['html5'] && 'single_text' === $options['widget'] && DateTimeType::HTML5_FORMAT === $options['format'];
+        }
+
+        return $isHtml5;
     }
 
     /**

@@ -20,6 +20,16 @@ class TestEntity
     private $email;
 
     /**
+     * @var int|null
+     */
+    private $int;
+
+    /**
+     * @var float|null
+     */
+    private $float;
+
+    /**
      * @var string
      * @Assert\Length(max=50)
      */
@@ -34,6 +44,11 @@ class TestEntity
      * @var \DateTime|null
      */
     private $dob;
+
+    /**
+     * @var \DateTime|null
+     */
+    private $dateNotHtml5;
 
     /**
      * @return string
@@ -126,6 +141,63 @@ class TestEntity
     public function setDob(?\DateTime $dob)
     {
         $this->dob = $dob;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getInt(): ?int
+    {
+        return $this->int;
+    }
+
+    /**
+     * @param int|null $int
+     * @return TestEntity
+     */
+    public function setInt(?int $int)
+    {
+        $this->int = $int;
+
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getFloat(): ?float
+    {
+        return $this->float;
+    }
+
+    /**
+     * @param float|null $float
+     * @return TestEntity
+     */
+    public function setFloat(?float $float)
+    {
+        $this->float = $float;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateNotHtml5(): ?\DateTime
+    {
+        return $this->dateNotHtml5;
+    }
+
+    /**
+     * @param \DateTime|null $dateNotHtml5
+     * @return TestEntity
+     */
+    public function setDateNotHtml5(?\DateTime $dateNotHtml5)
+    {
+        $this->dateNotHtml5 = $dateNotHtml5;
 
         return $this;
     }
