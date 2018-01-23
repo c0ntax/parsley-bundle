@@ -58,7 +58,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
         );
 
         $parsleyConstraints = array_merge(
-            $this->createParsleyConstraintsFromValidationConstraints($constraints),
+            $this->createParsleyConstraintsFromValidationConstraints($constraints, $form),
             $options[self::OPTION_NAME]
         );
 
@@ -87,18 +87,23 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @param Constraint[] $validationConstraints
+     * @param Constraint[]  $validationConstraints
+     * @param FormInterface $form
      * @return ConstraintInterface[]
+     * @throws \Exception
      * @throws \InvalidArgumentException
      */
-    private function createParsleyConstraintsFromValidationConstraints(array $validationConstraints): array
-    {
+    private function createParsleyConstraintsFromValidationConstraints(
+        array $validationConstraints,
+        FormInterface $form
+    ): array {
         $out = [];
         foreach ($validationConstraints as $validationConstraint) {
             try {
-                $out[] = ConstraintFactory::createFromValidationConstraint($validationConstraint);
+                $out[] = ConstraintFactory::createFromValidationConstraint($validationConstraint, $form);
             } catch (\RuntimeException $exception) {
                 // Don't care for now!
+                // TODO How loud this should be should be configurable
             }
         }
 

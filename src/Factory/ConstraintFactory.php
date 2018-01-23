@@ -11,7 +11,12 @@ use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Min;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
 use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\AbstractComparison;
 
 /**
  * Class ConstraintFactory
@@ -27,7 +32,7 @@ class ConstraintFactory
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public static function createFromValidationConstraint(Constraint $validationConstraint): ConstraintInterface
+    public static function createFromValidationConstraint(Constraint $validationConstraint, FormInterface $form): ConstraintInterface
     {
         if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
@@ -52,17 +57,43 @@ class ConstraintFactory
             return new Pattern($validationConstraint->pattern, self::convertParameters($validationConstraint->message));
         } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Email) {
             return new Email(self::convertParameters($validationConstraint->message));
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\GreaterThanOrEqual) {
-            return new Min(static::convertMinMaxValue($validationConstraint->value), self::convertParameters($validationConstraint->message));
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\GreaterThan) {
-            // Bit of a trickey one as isn't an analogous Parsley
-            return new Min(static::convertMinMaxValue($validationConstraint->value, true, true), self::convertParameters($validationConstraint->message));
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\LessThanOrEqual) {
-            return new Max(static::convertMinMaxValue($validationConstraint->value), self::convertParameters($validationConstraint->message));
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\LessThan) {
-            // Bit of a trickey one as isn't an analogous Parsley
-            return new Max(static::convertMinMaxValue($validationConstraint->value, true, false), self::convertParameters($validationConstraint->message));
+        } elseif ($validationConstraint instanceof AbstractComparison) {
+            // This is an interesting case that requires the context of the form element. If any of these validations
+            // happen to contain a value that is a string, it is assumed that the string is a dateTime. We should
+            // only do dateTime evaluations if the field input type is 'date', otherwise Parsley just wont bother!
+
+            $innerType = $form->getConfig()->getType()->getInnerType();
+
+            if (is_string($validationConstraint->value) && !($innerType instanceof DateType || $innerType instanceof BirthdayType || $innerType instanceof DateTimeType)) {
+                throw new \RuntimeException('Date evaluation called on a non-DateType field: '.$form->getName());
+            }
+
+            if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\GreaterThanOrEqual) {
+                return new Min(
+                    static::convertMinMaxValue($validationConstraint->value),
+                    self::convertParameters($validationConstraint->message)
+                );
+            } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\GreaterThan) {
+                // Bit of a trickey one as isn't an analogous Parsley
+                return new Min(
+                    static::convertMinMaxValue($validationConstraint->value, true, true),
+                    self::convertParameters($validationConstraint->message)
+                );
+            } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\LessThanOrEqual) {
+                return new Max(
+                    static::convertMinMaxValue($validationConstraint->value),
+                    self::convertParameters($validationConstraint->message)
+                );
+            } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\LessThan) {
+                // Bit of a trickey one as isn't an analogous Parsley
+                return new Max(
+                    static::convertMinMaxValue($validationConstraint->value, true, false),
+                    self::convertParameters($validationConstraint->message)
+                );
+            }
+
         }
+
 
         throw new \RuntimeException('Unsupported Symfony Constraint: '.get_class($validationConstraint));
     }

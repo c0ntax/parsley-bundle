@@ -7,6 +7,8 @@ use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
 use C0ntax\ParsleyBundle\Directive\Field\ConstraintErrorMessage;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Entity\TestEntity;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +29,14 @@ class TestType extends AbstractType
                         new ConstraintErrorMessage(MaxLength::class, 'You need less than %s chars'),
                     ],
                 ]
+            )
+            ->add(
+                'date',
+                DateType::class
+            )
+            ->add(
+                'dob',
+                BirthdayType::class
             )
 //            ->add('email', TextType::class)
 //            ->add('string', TextType::class, ['constraints' => [new NotBlank()]])

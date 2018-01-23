@@ -26,6 +26,16 @@ class TestEntity
     private $string;
 
     /**
+     * @var \DateTime|null
+     */
+    private $date;
+
+    /**
+     * @var \DateTime|null
+     */
+    private $dob;
+
+    /**
      * @return string
      */
     public function getId(): ?string
@@ -78,6 +88,44 @@ class TestEntity
     public function setString(string $string)
     {
         $this->string = $string;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDate(): ?\DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime|null $date
+     * @return TestEntity
+     */
+    public function setDate(?\DateTime $date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDob(): ?\DateTime
+    {
+        return $this->dob;
+    }
+
+    /**
+     * @param \DateTime|null $dob
+     * @return TestEntity
+     */
+    public function setDob(?\DateTime $dob)
+    {
+        $this->dob = $dob;
 
         return $this;
     }
