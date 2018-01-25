@@ -16,13 +16,13 @@ abstract class AbstractComparison extends AbstractConstraint
     /**
      * Min constructor.
      *
-     * @param \DateTime|float|int $min
+     * @param \DateTime|float|int $value
      * @param string|null         $errorMessage
      * @throws \InvalidArgumentException
      */
-    public function __construct($min, string $errorMessage = null)
+    public function __construct($value, string $errorMessage = null)
     {
-        $this->setValue($min);
+        $this->setValue($value);
         parent::__construct($errorMessage);
     }
 

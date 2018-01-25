@@ -4,19 +4,13 @@ declare(strict_types = 1);
 namespace C0ntax\ParsleyBundle\Factory;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Email;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Length;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Max;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\MaxLength;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Min;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\MinLength;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Required;
+use C0ntax\ParsleyBundle\Directive\Field\Constraint as ParsleyConstraint;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints as SymfonyConstraint;
 use Symfony\Component\Validator\Constraints\AbstractComparison;
 
 /**
@@ -40,71 +34,80 @@ class ConstraintFactory
     ): ?ConstraintInterface {
         // TODO Change this to use the ViewInterface instead of the FormInterface as that makes a lot more sense!
 
-        if ($validationConstraint instanceof  \Symfony\Component\Validator\Constraints\Valid) {
+        if ($validationConstraint instanceof SymfonyConstraint\Valid) {
             // This case is not an error. There just isn't a 'like-for-like' replacement
             return null;
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotNull) {
-            return new Required($validationConstraint->message);
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\NotBlank) {
-            return new Required($validationConstraint->message);
-        } if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Length) {
+        } elseif ($validationConstraint instanceof SymfonyConstraint\NotNull) {
+            return new ParsleyConstraint\Required($validationConstraint->message);
+        } elseif ($validationConstraint instanceof SymfonyConstraint\NotBlank) {
+            return new ParsleyConstraint\Required($validationConstraint->message);
+        }
+        if ($validationConstraint instanceof SymfonyConstraint\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
                 // TODO Pick a better message!
-                return new Length(
+                return new ParsleyConstraint\Length(
                     $validationConstraint->min,
                     $validationConstraint->max,
                     self::convertParameters($validationConstraint->exactMessage)
                 );
             } elseif ($validationConstraint->min !== null) {
-                return new MinLength(
+                return new ParsleyConstraint\MinLength(
                     $validationConstraint->min,
                     self::convertParameters($validationConstraint->minMessage)
                 );
             } else {
-                return new MaxLength(
+                return new ParsleyConstraint\MaxLength(
                     $validationConstraint->max,
                     self::convertParameters($validationConstraint->maxMessage)
                 );
             }
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Regex) {
-            return new Pattern($validationConstraint->pattern, self::convertParameters($validationConstraint->message));
-        } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\Email) {
-            return new Email(self::convertParameters($validationConstraint->message));
+        } elseif ($validationConstraint instanceof SymfonyConstraint\Regex) {
+            return new ParsleyConstraint\Pattern($validationConstraint->pattern, self::convertParameters($validationConstraint->message));
+        } elseif ($validationConstraint instanceof SymfonyConstraint\Email) {
+            return new ParsleyConstraint\Email(self::convertParameters($validationConstraint->message));
         } elseif ($validationConstraint instanceof AbstractComparison) {
             // This is an interesting case that requires the context of the form element. If any of these validations
             // happen to contain a value that is a string, it is assumed that the string is a dateTime. We should
             // only do dateTime evaluations if the field input type is 'date', otherwise Parsley just wont bother!
 
-            $innerType = $form->getConfig()->getType()->getInnerType();
-
             if (is_string($validationConstraint->value) && !static::isFormHtml5DateType($form)) {
                 throw new \RuntimeException('Date evaluation called on a non-DateType field: '.$form->getName());
             }
 
-            if ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\GreaterThanOrEqual) {
-                return new Min(
+            if ($validationConstraint instanceof SymfonyConstraint\GreaterThanOrEqual) {
+                return new ParsleyConstraint\Min(
                     static::convertMinMaxValue($validationConstraint->value),
                     self::convertParameters($validationConstraint->message)
                 );
-            } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\GreaterThan) {
+            } elseif ($validationConstraint instanceof SymfonyConstraint\GreaterThan) {
                 // Bit of a trickey one as isn't an analogous Parsley
-                return new Min(
+                return new ParsleyConstraint\Min(
                     static::convertMinMaxValue($validationConstraint->value, true, true),
                     self::convertParameters($validationConstraint->message)
                 );
-            } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\LessThanOrEqual) {
-                return new Max(
+            } elseif ($validationConstraint instanceof SymfonyConstraint\LessThanOrEqual) {
+                return new ParsleyConstraint\Max(
                     static::convertMinMaxValue($validationConstraint->value),
                     self::convertParameters($validationConstraint->message)
                 );
-            } elseif ($validationConstraint instanceof \Symfony\Component\Validator\Constraints\LessThan) {
+            } elseif ($validationConstraint instanceof SymfonyConstraint\LessThan) {
                 // Bit of a trickey one as isn't an analogous Parsley
-                return new Max(
+                return new ParsleyConstraint\Max(
                     static::convertMinMaxValue($validationConstraint->value, true, false),
                     self::convertParameters($validationConstraint->message)
                 );
             }
+        } elseif ($validationConstraint instanceof SymfonyConstraint\Range) {
+            // No error message translation here
 
+            if (is_string($validationConstraint->min) && !static::isFormHtml5DateType($form)) {
+                throw new \RuntimeException('Date evaluation called on a non-DateType field: '.$form->getName());
+            }
+
+            return new ParsleyConstraint\Range(
+                static::convertMinMaxValue($validationConstraint->min),
+                static::convertMinMaxValue($validationConstraint->max)
+            );
         }
 
         throw new \RuntimeException('Unsupported Symfony Constraint: '.get_class($validationConstraint));

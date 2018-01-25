@@ -54,6 +54,13 @@ Since this library is very much alpha, I haven't had time to add all the [valida
 * Max
 * Min
 * Required
+* Range
+
+## Specific Validaton Notes
+
+Sometimes there is not a 1-2-1 mapping of Symfony error messages to Parsley. This is because with Parsley, you supply only one error message for the validator which is then displayed at runtime, whereas with Symfony constraints, they can pick a specific error message based on what didn't validate. Listed here are any Symfony validators where I've had to pick a specific error message that you should override using the ConstraintErrorMessage directive (so that if server based validations kick in, they will still have a message that makes sense)
+
+* Range
 
 ## Usage
 
