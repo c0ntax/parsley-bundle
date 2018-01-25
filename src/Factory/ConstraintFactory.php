@@ -34,14 +34,15 @@ class ConstraintFactory
     ): ?ConstraintInterface {
         // TODO Change this to use the ViewInterface instead of the FormInterface as that makes a lot more sense!
 
-        if ($validationConstraint instanceof  SymfonyConstraint\Valid) {
+        if ($validationConstraint instanceof SymfonyConstraint\Valid) {
             // This case is not an error. There just isn't a 'like-for-like' replacement
             return null;
         } elseif ($validationConstraint instanceof SymfonyConstraint\NotNull) {
             return new ParsleyConstraint\Required($validationConstraint->message);
         } elseif ($validationConstraint instanceof SymfonyConstraint\NotBlank) {
             return new ParsleyConstraint\Required($validationConstraint->message);
-        } if ($validationConstraint instanceof SymfonyConstraint\Length) {
+        }
+        if ($validationConstraint instanceof SymfonyConstraint\Length) {
             if ($validationConstraint->min !== null && $validationConstraint->max !== null) {
                 // TODO Pick a better message!
                 return new ParsleyConstraint\Length(
@@ -96,7 +97,17 @@ class ConstraintFactory
                     self::convertParameters($validationConstraint->message)
                 );
             }
+        } elseif ($validationConstraint instanceof SymfonyConstraint\Range) {
+            // No error message translation here
 
+            if (is_string($validationConstraint->min) && !static::isFormHtml5DateType($form)) {
+                throw new \RuntimeException('Date evaluation called on a non-DateType field: '.$form->getName());
+            }
+
+            return new ParsleyConstraint\Range(
+                static::convertMinMaxValue($validationConstraint->min),
+                static::convertMinMaxValue($validationConstraint->max)
+            );
         }
 
         throw new \RuntimeException('Unsupported Symfony Constraint: '.get_class($validationConstraint));
