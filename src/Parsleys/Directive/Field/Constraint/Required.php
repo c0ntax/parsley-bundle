@@ -1,11 +1,11 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
+namespace C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint;
 
 /**
  * Class Required
  *
- * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint
  */
 class Required extends AbstractConstraint
 {

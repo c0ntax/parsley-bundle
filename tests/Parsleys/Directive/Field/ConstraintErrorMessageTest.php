@@ -1,9 +1,9 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Tests\Directive\Field;
+namespace C0ntax\ParsleyBundle\Tests\Parsleys\Directive\Field;
 
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
-use C0ntax\ParsleyBundle\Directive\Field\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\ConstraintErrorMessage;
 
 class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Class C0ntax\ParsleyBundle\Tests\Directive\Field\ConstraintErrorMessageTest does not implement C0ntax\ParsleyBundle\Contracts\ConstraintInterface
+     * @expectedExceptionMessage Class C0ntax\ParsleyBundle\Tests\Parsleys\Directive\Field\ConstraintErrorMessageTest does not implement C0ntax\ParsleyBundle\Contracts\ConstraintInterface
      */
     public function testGetViewAttrFail2()
     {

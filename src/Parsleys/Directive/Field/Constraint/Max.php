@@ -1,12 +1,12 @@
 <?php
 declare(strict_types = 1);
 
-namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
+namespace C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint;
 
 /**
  * Class Min
  *
- * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint
  */
 class Max extends AbstractComparison
 {

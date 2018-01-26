@@ -5,8 +5,8 @@ namespace C0ntax\ParsleyBundle\Form\Extension;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Generic;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Generic;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;

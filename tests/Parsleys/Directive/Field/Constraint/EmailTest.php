@@ -1,8 +1,8 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Tests\Directive\Field\Constraint;
+namespace C0ntax\ParsleyBundle\Tests\Parsleys\Directive\Field\Constraint;
 
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Email;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint\Email;
 
 class EmailTest extends \PHPUnit_Framework_TestCase
 {

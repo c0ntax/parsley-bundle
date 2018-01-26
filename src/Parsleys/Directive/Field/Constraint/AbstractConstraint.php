@@ -1,15 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-namespace C0ntax\ParsleyBundle\Directive\Field\Constraint;
+namespace C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
-use C0ntax\ParsleyBundle\Directive\Field\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\ConstraintErrorMessage;
 
 /**
  * Class AbstractConstraint
  *
- * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint
  */
 abstract class AbstractConstraint implements ConstraintInterface
 {

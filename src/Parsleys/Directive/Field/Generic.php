@@ -1,15 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-namespace C0ntax\ParsleyBundle\Directive\Field;
+namespace C0ntax\ParsleyBundle\Parsleys\Directive\Field;
 
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\AbstractConstraint;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint\AbstractConstraint;
 
 /**
  * Class Generic
  *
- * @package C0ntax\ParsleyBundle\Directive\Field
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive\Field
  */
 class Generic implements DirectiveInterface
 {

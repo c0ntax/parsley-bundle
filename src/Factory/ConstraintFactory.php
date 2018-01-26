@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace C0ntax\ParsleyBundle\Factory;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint as ParsleyConstraint;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint as ParsleyConstraint;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints\AbstractComparison;
 /**
  * Class ConstraintFactory
  *
- * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint
  */
 class ConstraintFactory
 {

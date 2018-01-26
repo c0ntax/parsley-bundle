@@ -1,15 +1,15 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Directive\Field;
+namespace C0ntax\ParsleyBundle\Parsleys\Directive\Field;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\AbstractConstraint;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint\AbstractConstraint;
 
 /**
  * Class ErrorMessage
  *
- * @package C0ntax\ParsleyBundle\Directive
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive
  */
 class ConstraintErrorMessage implements DirectiveInterface
 {

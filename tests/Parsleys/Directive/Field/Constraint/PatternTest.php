@@ -1,8 +1,8 @@
 <?php
 
-namespace C0ntax\ParsleyBundle\Tests\Directive\Field\Constraint;
+namespace C0ntax\ParsleyBundle\Tests\Parsleys\Directive\Field\Constraint;
 
-use C0ntax\ParsleyBundle\Directive\Field\Constraint\Pattern;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint\Pattern;
 
 class PatternTest extends \PHPUnit_Framework_TestCase
 {

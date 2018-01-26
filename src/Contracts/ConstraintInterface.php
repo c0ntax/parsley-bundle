@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Contracts;
 
-use C0ntax\ParsleyBundle\Directive\Field\ConstraintErrorMessage;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\ConstraintErrorMessage;
 
 /**
  * Interface ConstraintInterface
  *
- * @package C0ntax\ParsleyBundle\Directive\Field\Constraint
+ * @package C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint
  */
 interface ConstraintInterface extends DirectiveInterface
 {
