@@ -156,6 +156,23 @@ Let's assume that the Entity in the example above is out of your control. It's c
 
 *NOTE* The class passed to identify where to attache the error message is the ParsleyBundle one and not the Symfony one!
 
+## Removals
+
+There may be occassions where you want the bridge between Symfony and Parsley enabled, but specific validations 'removed' from a form element. For example, in the case of [Group Sequences](https://symfony.com/doc/current/validation/sequence_provider.html) where there is no equivalent in Parsley. With removals, you can 'turn off' the Symfony Constraint and manually add your own custom Parsely validation. For example, say we wanted to have a Regex symfony validation on the server, but not on the client side:
+
+```php
+  $builder->add(
+    'field',
+    TextType::class,
+    [
+      'constraints' => [new Regex(['pattern' => '/bla/]),
+      'parsleys' => [new RemoveSymfonyConstraint(Regex::class)],]
+    ]
+  );
+```
+
+There is also the ``RemoveParsleyConstraint()`` class that can be used to remove specific Parsley constrains. This is handy if you want to remove something that was auto-generated from a Symfony Constraint.
+
 ## Rolling your own
 
 You can add your own parsley directives by simply implementing the ``DirectiveInterface``. The only requirement is that it passes back an array of attributes that will be injected into your form HTML.

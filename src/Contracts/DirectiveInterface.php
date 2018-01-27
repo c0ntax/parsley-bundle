@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Contracts;
 
@@ -7,7 +8,7 @@ namespace C0ntax\ParsleyBundle\Contracts;
  *
  * @package C0ntax\ParsleyBundle\Contracts
  */
-interface DirectiveInterface
+interface DirectiveInterface extends ParsleyInterface
 {
     /**
      * @return array
