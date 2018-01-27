@@ -3,9 +3,9 @@
 namespace C0ntax\ParsleyBundle\Tests\Factory;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Constraint as ParsleyConstraint;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
 use C0ntax\ParsleyBundle\Form\Extension\ParsleyTypeExtension;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Constraint as ParsleyConstraint;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type\TestType;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;

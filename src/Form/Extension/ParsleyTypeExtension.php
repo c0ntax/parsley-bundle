@@ -5,8 +5,12 @@ namespace C0ntax\ParsleyBundle\Form\Extension;
 
 use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
 use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
-use C0ntax\ParsleyBundle\Directive\Field\Generic;
+use C0ntax\ParsleyBundle\Contracts\ParsleyInterface;
+use C0ntax\ParsleyBundle\Contracts\RemoveInterface;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Generic;
+use C0ntax\ParsleyBundle\Parsleys\RemoveParsleyConstraint;
+use C0ntax\ParsleyBundle\Parsleys\RemoveSymfonyConstraint;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
@@ -52,14 +56,22 @@ class ParsleyTypeExtension extends AbstractTypeExtension
             return;
         }
 
-        $constraints = array_merge(
-            $this->getAnnotatedConstraintsFromForm($form),
-            $this->getConstraintsFromForm($form)
+        $parsleys = $options[self::OPTION_NAME];
+
+        $symfonyConstraints = $this->removeFromConstraints(
+            array_merge(
+                $this->getAnnotatedConstraintsFromForm($form),
+                $this->getConstraintsFromForm($form)
+            ),
+            $this->getRemoveSymfonyConstraintsFromParsleys($parsleys)
         );
 
-        $parsleyConstraints = array_merge(
-            $this->createParsleyConstraintsFromValidationConstraints($constraints, $form),
-            $options[self::OPTION_NAME]
+        $parsleyConstraints = $this->removeFromConstraints(
+            array_merge(
+                $this->createParsleyConstraintsFromValidationConstraints($symfonyConstraints, $form),
+                $this->getDirectivesFromParsleys($parsleys)
+            ),
+            $this->getRemoveParsleyConstraintsFromParsleys($parsleys)
         );
 
         $this->addParsleyToView($view, $parsleyConstraints);
@@ -76,13 +88,89 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     /**
      * @param OptionsResolver $resolver
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
+     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(
-            [
-                self::OPTION_NAME => [],
-            ]
+        $resolver
+            ->setDefaults(
+                [
+                    self::OPTION_NAME => [],
+                ]
+            )
+            ->addAllowedTypes(self::OPTION_NAME, 'array');
+    }
+
+    /**
+     * @param ParsleyInterface[] $parsleys
+     * @return DirectiveInterface[]
+     */
+    private function getDirectivesFromParsleys(array $parsleys): array
+    {
+        $dir = array_values(
+            array_filter(
+                $parsleys,
+                function (ParsleyInterface $parsley) {
+                    return $parsley instanceof DirectiveInterface;
+                }
+            )
+        );
+
+        return $dir;
+    }
+
+    /**
+     * @param ParsleyInterface[] $parsleys
+     * @return RemoveParsleyConstraint[]
+     */
+    private function getRemoveParsleyConstraintsFromParsleys(array $parsleys): array
+    {
+        return array_values(
+            array_filter(
+                $parsleys,
+                function (ParsleyInterface $parsley) {
+                    return $parsley instanceof RemoveParsleyConstraint;
+                }
+            )
+        );
+    }
+
+    /**
+     * @param ParsleyInterface[] $parsleys
+     * @return RemoveSymfonyConstraint[]
+     */
+    private function getRemoveSymfonyConstraintsFromParsleys(array $parsleys): array
+    {
+        return array_values(
+            array_filter(
+                $parsleys,
+                function (ParsleyInterface $parsley) {
+                    return $parsley instanceof RemoveSymfonyConstraint;
+                }
+            )
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\Validator\Constraint[]|ConstraintInterface[] $constraints
+     * @param RemoveInterface[]                                               $removals
+     * @return \Symfony\Component\Validator\Constraint[]|ConstraintInterface[]
+     */
+    private function removeFromConstraints(array $constraints, array $removals): array
+    {
+        return array_values(
+            array_filter(
+                $constraints,
+                function ($constraint) use ($removals) {
+                    foreach ($removals as $removal) {
+                        if ($removal->getClassName() === get_class($constraint)) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+            )
         );
     }
 
