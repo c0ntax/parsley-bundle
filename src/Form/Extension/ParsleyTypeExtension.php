@@ -8,7 +8,7 @@ use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
 use C0ntax\ParsleyBundle\Contracts\ParsleyInterface;
 use C0ntax\ParsleyBundle\Contracts\RemoveInterface;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
-use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Generic;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Trigger;
 use C0ntax\ParsleyBundle\Parsleys\RemoveParsleyConstraint;
 use C0ntax\ParsleyBundle\Parsleys\RemoveSymfonyConstraint;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -214,16 +214,23 @@ class ParsleyTypeExtension extends AbstractTypeExtension
      * @param FormView             $view
      * @param DirectiveInterface[] $directives
      */
-    private function addParsleyToView(FormView $view, array $directives)
+    private function addParsleyToView(FormView $view, array $directives): void
     {
         $attr = [];
-        if (count($directives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
-            $directives[] = new Generic('trigger', $this->getConfig()['field']['trigger']);
-        }
-        foreach ($directives as $constraint) {
-            foreach ($constraint->getViewAttr() as $key => $value) {
+        $hasTrigger = false;
+
+        foreach ($directives as $directive) {
+            foreach ($directive->getViewAttr() as $key => $value) {
                 $attr[$key] = $value;
             }
+            if ($directive instanceof Trigger) {
+                $hasTrigger = true;
+            }
+        }
+
+        if (!$hasTrigger && count($directives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
+            $trigger = new Trigger($this->getConfig()['field']['trigger']);
+            $attr = array_merge($attr, $trigger->getViewAttr());
         }
 
         if (count($attr) > 0) {
