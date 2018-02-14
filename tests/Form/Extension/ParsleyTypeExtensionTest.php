@@ -3,6 +3,7 @@
 namespace C0ntax\ParsleyBundle\Tests\Form\Extension;
 
 use C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type\TestRemovalType;
+use C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type\TestTriggerType;
 use C0ntax\ParsleyBundle\Tests\Fixtures\Form\Type\TestType;
 use C0ntax\ParsleyBundle\Tests\Form\AbstractTypeTestCase;
 use Symfony\Component\Form\FormInterface;
@@ -70,6 +71,20 @@ class ParsleyTypeExtensionTest extends AbstractTypeTestCase
         );
     }
 
+    public function testTriggerOverride()
+    {
+        $form = $this->createTriggerForm();
+        $view = $form->createView();
+        self::assertEquals(
+            [
+                'data-parsley-required' => 'true',
+                'data-parsley-trigger' => 'click',
+            ],
+            $view->children['check']->vars['attr']
+        );
+
+    }
+
     protected function getParsleyTypeConfig()
     {
         return [
@@ -96,6 +111,15 @@ class ParsleyTypeExtensionTest extends AbstractTypeTestCase
     private function createRemovalForm(): FormInterface
     {
         return $this->factory->create(TestRemovalType::class);
+    }
+
+    /**
+     * @return FormInterface
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    private function createTriggerForm(): FormInterface
+    {
+        return $this->factory->create(TestTriggerType::class);
     }
 
 }
