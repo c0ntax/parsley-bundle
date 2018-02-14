@@ -8,7 +8,7 @@ use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
 use C0ntax\ParsleyBundle\Contracts\ParsleyInterface;
 use C0ntax\ParsleyBundle\Contracts\RemoveInterface;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
-use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Generic;
+use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Trigger;
 use C0ntax\ParsleyBundle\Parsleys\RemoveParsleyConstraint;
 use C0ntax\ParsleyBundle\Parsleys\RemoveSymfonyConstraint;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -218,7 +218,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     {
         $attr = [];
         if (count($directives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
-            $directives[] = new Generic('trigger', $this->getConfig()['field']['trigger']);
+            $directives[] = new Trigger($this->getConfig()['field']['trigger']);
         }
         foreach ($directives as $constraint) {
             foreach ($constraint->getViewAttr() as $key => $value) {
