@@ -68,15 +68,19 @@ class ParsleyTypeExtension extends AbstractTypeExtension
             $this->getRemoveSymfonyConstraintsFromParsleys($parsleys)
         );
 
-        $parsleyConstraints = $this->removeFromConstraints(
-            array_merge(
-                $this->createParsleyConstraintsFromValidationConstraints($symfonyConstraints, $form),
-                $this->getDirectivesFromParsleys($parsleys)
-            ),
+        $parsleyConstraints = array_merge(
+            $this->createParsleyConstraintsFromValidationConstraints($symfonyConstraints, $form),
+            $this->getDirectivesFromParsleys($parsleys)
+        );
+
+        $parsleyDirectives = $this->addDefaultDirectives($parsleyConstraints);
+
+        $parsleyDirectives = $this->removeFromConstraints(
+            $parsleyDirectives,
             $this->getRemoveParsleyDirectivesFromParsleys($parsleys)
         );
 
-        $this->addParsleyToView($view, $parsleyConstraints);
+        $this->addParsleyToView($view, $parsleyDirectives);
     }
 
     /**
@@ -101,6 +105,29 @@ class ParsleyTypeExtension extends AbstractTypeExtension
                 ]
             )
             ->addAllowedTypes(self::OPTION_NAME, 'array');
+    }
+
+    /**
+     * @param array $parsleyDirectives
+     * @return array
+     */
+    private function addDefaultDirectives(array $parsleyDirectives): array
+    {
+        $has = [];
+        foreach ($parsleyDirectives as $parsleyDirective) {
+            $class = get_class($parsleyDirective);
+            if (array_key_exists($class, $has)) {
+                $has[$class]++;
+            } else {
+                $has[$class] = 1;
+            }
+        }
+
+        if (!array_key_exists(Trigger::class, $has) && count($parsleyDirectives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
+            $parsleyDirectives[] = new Trigger($this->getConfig()['field']['trigger']);
+        }
+
+        return $parsleyDirectives;
     }
 
     /**
@@ -228,11 +255,6 @@ class ParsleyTypeExtension extends AbstractTypeExtension
             if ($directive instanceof Trigger) {
                 $hasTrigger = true;
             }
-        }
-
-        if (!$hasTrigger && count($directives) > 0 && $this->getConfig()['field']['trigger'] !== null) {
-            $trigger = new Trigger($this->getConfig()['field']['trigger']);
-            $attr = array_merge($attr, $trigger->getViewAttr());
         }
 
         if (count($attr) > 0) {
