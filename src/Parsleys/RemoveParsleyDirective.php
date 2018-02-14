@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace C0ntax\ParsleyBundle\Parsleys;
 
-use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
+use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
 
 /**
  * Class RemoveParsleyConstraint
@@ -11,9 +11,8 @@ use C0ntax\ParsleyBundle\Contracts\ConstraintInterface;
  * Used to remove Parsley Directives after they've been put in
  *
  * @package C0ntax\ParsleyBundle\Parsleys
- * @deprecated Use RemoveParsleyDirective instead
  */
-class RemoveParsleyConstraint extends AbstractRemove
+class RemoveParsleyDirective extends AbstractRemove
 {
     /**
      * RemoveParsley constructor.
@@ -23,6 +22,6 @@ class RemoveParsleyConstraint extends AbstractRemove
      */
     public function __construct(string $className)
     {
-        parent::__construct($className, ConstraintInterface::class);
+        parent::__construct($className, DirectiveInterface::class);
     }
 }

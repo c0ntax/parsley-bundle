@@ -171,7 +171,7 @@ There may be occassions where you want the bridge between Symfony and Parsley en
   );
 ```
 
-There is also the ``RemoveParsleyConstraint()`` class that can be used to remove specific Parsley constrains. This is handy if you want to remove something that was auto-generated from a Symfony Constraint.
+There is also the ``RemoveParsleyDirective()`` class that can be used to remove specific Parsley constrains. This is handy if you want to remove something that was auto-generated from a Symfony Constraint.
 
 ## Rolling your own
 
