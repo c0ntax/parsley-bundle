@@ -82,7 +82,6 @@ class ParsleyTypeExtensionTest extends AbstractTypeTestCase
             ],
             $view->children['check']->vars['attr']
         );
-
     }
 
     protected function getParsleyTypeConfig()

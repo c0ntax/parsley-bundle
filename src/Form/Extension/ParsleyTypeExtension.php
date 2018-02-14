@@ -8,8 +8,10 @@ use C0ntax\ParsleyBundle\Contracts\DirectiveInterface;
 use C0ntax\ParsleyBundle\Contracts\ParsleyInterface;
 use C0ntax\ParsleyBundle\Contracts\RemoveInterface;
 use C0ntax\ParsleyBundle\Factory\ConstraintFactory;
+use C0ntax\ParsleyBundle\Parsleys\AbstractRemove;
 use C0ntax\ParsleyBundle\Parsleys\Directive\Field\Trigger;
 use C0ntax\ParsleyBundle\Parsleys\RemoveParsleyConstraint;
+use C0ntax\ParsleyBundle\Parsleys\RemoveParsleyDirective;
 use C0ntax\ParsleyBundle\Parsleys\RemoveSymfonyConstraint;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -71,7 +73,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
                 $this->createParsleyConstraintsFromValidationConstraints($symfonyConstraints, $form),
                 $this->getDirectivesFromParsleys($parsleys)
             ),
-            $this->getRemoveParsleyConstraintsFromParsleys($parsleys)
+            $this->getRemoveParsleyDirectivesFromParsleys($parsleys)
         );
 
         $this->addParsleyToView($view, $parsleyConstraints);
@@ -121,15 +123,15 @@ class ParsleyTypeExtension extends AbstractTypeExtension
 
     /**
      * @param ParsleyInterface[] $parsleys
-     * @return RemoveParsleyConstraint[]
+     * @return AbstractRemove[]
      */
-    private function getRemoveParsleyConstraintsFromParsleys(array $parsleys): array
+    private function getRemoveParsleyDirectivesFromParsleys(array $parsleys): array
     {
         return array_values(
             array_filter(
                 $parsleys,
                 function (ParsleyInterface $parsley) {
-                    return $parsley instanceof RemoveParsleyConstraint;
+                    return $parsley instanceof RemoveParsleyDirective || $parsley instanceof RemoveParsleyConstraint;
                 }
             )
         );
