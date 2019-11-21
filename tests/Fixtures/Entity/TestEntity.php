@@ -8,6 +8,7 @@ class TestEntity
 {
     /**
      * @var string
+     *
      * @Assert\Regex(pattern="/^[a-z]{10}$/", message="This doesn't look like an id")
      * @Assert\Length(max=10)
      */
@@ -15,6 +16,7 @@ class TestEntity
 
     /**
      * @var string
+     *
      * @Assert\Email(message="This isn't an email address")
      */
     private $email;
@@ -31,6 +33,7 @@ class TestEntity
 
     /**
      * @var string
+     *
      * @Assert\Length(max=50)
      */
     private $string;
@@ -60,6 +63,7 @@ class TestEntity
 
     /**
      * @param string $id
+     *
      * @return TestEntity
      */
     public function setId(string $id)
@@ -79,6 +83,7 @@ class TestEntity
 
     /**
      * @param string $email
+     *
      * @return TestEntity
      */
     public function setEmail(string $email)
@@ -98,6 +103,7 @@ class TestEntity
 
     /**
      * @param string $string
+     *
      * @return TestEntity
      */
     public function setString(string $string)
@@ -117,6 +123,7 @@ class TestEntity
 
     /**
      * @param \DateTime|null $date
+     *
      * @return TestEntity
      */
     public function setDate(?\DateTime $date)
@@ -136,6 +143,7 @@ class TestEntity
 
     /**
      * @param \DateTime|null $dob
+     *
      * @return TestEntity
      */
     public function setDob(?\DateTime $dob)
@@ -155,6 +163,7 @@ class TestEntity
 
     /**
      * @param int|null $int
+     *
      * @return TestEntity
      */
     public function setInt(?int $int)
@@ -174,6 +183,7 @@ class TestEntity
 
     /**
      * @param float|null $float
+     *
      * @return TestEntity
      */
     public function setFloat(?float $float)
@@ -193,6 +203,7 @@ class TestEntity
 
     /**
      * @param \DateTime|null $dateNotHtml5
+     *
      * @return TestEntity
      */
     public function setDateNotHtml5(?\DateTime $dateNotHtml5)

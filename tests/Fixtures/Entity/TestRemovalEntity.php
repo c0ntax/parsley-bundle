@@ -8,6 +8,7 @@ class TestRemovalEntity
 {
     /**
      * @var string|null
+     *
      * @Assert\Regex(pattern="/^[a-z]{10}$/", message="This doesn't look like an id")
      * @Assert\Length(max=10)
      */
@@ -15,6 +16,7 @@ class TestRemovalEntity
 
     /**
      * @var string|null
+     *
      * @Assert\Regex(pattern="/^[a-z]{10}$/", message="This doesn't look like an id")
      * @Assert\Length(max=10)
      */
@@ -22,6 +24,7 @@ class TestRemovalEntity
 
     /**
      * @var string|null
+     *
      * @Assert\Regex(pattern="/^[a-z]{10}$/", message="This doesn't look like an id")
      * @Assert\Length(max=10)
      */
@@ -37,6 +40,7 @@ class TestRemovalEntity
 
     /**
      * @param null|string $id1
+     *
      * @return TestRemovalEntity
      */
     public function setId1(?string $id1)
@@ -56,6 +60,7 @@ class TestRemovalEntity
 
     /**
      * @param null|string $id2
+     *
      * @return TestRemovalEntity
      */
     public function setId2(?string $id2)
@@ -75,6 +80,7 @@ class TestRemovalEntity
 
     /**
      * @param null|string $id3
+     *
      * @return TestRemovalEntity
      */
     public function setId3(?string $id3)

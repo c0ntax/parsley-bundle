@@ -17,8 +17,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('c0ntax_parsley');
+        $treeBuilder = new TreeBuilder('c0ntax_parsley');
+        $rootNode = $treeBuilder->getRootNode();
 
         // @formatter:off
         $rootNode

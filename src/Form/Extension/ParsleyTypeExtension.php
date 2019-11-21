@@ -38,6 +38,14 @@ class ParsleyTypeExtension extends AbstractTypeExtension
     public const OPTION_NAME = 'parsleys';
 
     /**
+     * @return iterable
+     */
+    public static function getExtendedTypes(): iterable
+    {
+        return [FormType::class];
+    }
+
+    /**
      * ParsleyTypeExtension constructor.
      *
      * @param array              $config
@@ -82,6 +90,7 @@ class ParsleyTypeExtension extends AbstractTypeExtension
 
         $this->addParsleyToView($view, $parsleyDirectives);
     }
+
 
     /**
      * {@inheritDoc}

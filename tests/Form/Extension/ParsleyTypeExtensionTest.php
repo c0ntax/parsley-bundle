@@ -96,6 +96,7 @@ class ParsleyTypeExtensionTest extends AbstractTypeTestCase
 
     /**
      * @return FormInterface
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     private function createForm(): FormInterface
@@ -105,6 +106,7 @@ class ParsleyTypeExtensionTest extends AbstractTypeTestCase
 
     /**
      * @return FormInterface
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     private function createRemovalForm(): FormInterface
@@ -114,11 +116,11 @@ class ParsleyTypeExtensionTest extends AbstractTypeTestCase
 
     /**
      * @return FormInterface
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     private function createTriggerForm(): FormInterface
     {
         return $this->factory->create(TestTriggerType::class);
     }
-
 }
