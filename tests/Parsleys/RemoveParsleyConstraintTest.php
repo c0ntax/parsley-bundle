@@ -12,6 +12,7 @@ class RemoveParsleyConstraintTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getValidClassNames
+     *
      * @param string $className
      */
     public function testValid(string $className)
@@ -21,8 +22,11 @@ class RemoveParsleyConstraintTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getInvalidClassNames
+     *
      * @param string $className
+     *
      * @expectedException \InvalidArgumentException
+     *
      * @expectedExceptionMessageRegExp /^Class [\S]+ does not implement C0ntax\\ParsleyBundle\\Contracts\\ConstraintInterface$/
      */
     public function testInvalid(string $className)

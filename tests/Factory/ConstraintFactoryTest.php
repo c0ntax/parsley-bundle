@@ -39,6 +39,7 @@ class ConstraintFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \RuntimeException
+     *
      * @expectedExceptionMessage Unsupported Symfony Constraint: C0ntax\ParsleyBundle\Tests\Fixtures\Validator\Constraints\UnknownConstraint
      */
     public function testCreateFromValidationConstraintException()

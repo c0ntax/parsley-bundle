@@ -10,6 +10,7 @@ class RemoveSymfonyConstraintTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getValidClassNames
+     *
      * @param string $className
      */
     public function testValid(string $className)
@@ -19,8 +20,11 @@ class RemoveSymfonyConstraintTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getInvalidClassNames
+     *
      * @param string $className
+     *
      * @expectedException \InvalidArgumentException
+     *
      * @expectedExceptionMessageRegExp /^Class [\S]+ does not implement Symfony\\Component\\Validator\\Constraint$/
      */
     public function testInvalid(string $className)

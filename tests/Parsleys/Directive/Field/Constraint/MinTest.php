@@ -29,7 +29,5 @@ class MinTest extends \PHPUnit_Framework_TestCase
             ['data-parsley-min' => $timeNow->format('Y-m-d H:i:s')],
             $value->getViewAttr()
         );
-
     }
-
 }

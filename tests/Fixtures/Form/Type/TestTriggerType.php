@@ -21,7 +21,7 @@ class TestTriggerType extends AbstractType
                 [
                     'parsleys' => [
                         new Required(),
-                        new Trigger('click')
+                        new Trigger('click'),
                     ],
                 ]
             )
