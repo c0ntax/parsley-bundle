@@ -18,6 +18,7 @@ class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     *
      * @expectedExceptionMessage not a class is not a class and therefore doesn't implement C0ntax\ParsleyBundle\Contracts\ConstraintInterface
      */
     public function testGetViewAttrFail1()
@@ -31,6 +32,7 @@ class ConstraintErrorMessageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     *
      * @expectedExceptionMessage Class C0ntax\ParsleyBundle\Tests\Parsleys\Directive\Field\ConstraintErrorMessageTest does not implement C0ntax\ParsleyBundle\Contracts\ConstraintInterface
      */
     public function testGetViewAttrFail2()

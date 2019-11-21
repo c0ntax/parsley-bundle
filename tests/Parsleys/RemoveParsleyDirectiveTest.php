@@ -13,6 +13,7 @@ class RemoveParsleyDirectiveTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getValidClassNames
+     *
      * @param string $className
      */
     public function testValid(string $className)
@@ -22,8 +23,11 @@ class RemoveParsleyDirectiveTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getInvalidClassNames
+     *
      * @param string $className
+     *
      * @expectedException \InvalidArgumentException
+     *
      * @expectedExceptionMessageRegExp /^Class [\S]+ does not implement C0ntax\\ParsleyBundle\\Contracts\\DirectiveInterface$/
      */
     public function testInvalid(string $className)

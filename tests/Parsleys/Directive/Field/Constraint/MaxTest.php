@@ -29,7 +29,5 @@ class MaxTest extends \PHPUnit_Framework_TestCase
             ['data-parsley-max' => $timeNow->format('Y-m-d H:i:s')],
             $value->getViewAttr()
         );
-
     }
-
 }

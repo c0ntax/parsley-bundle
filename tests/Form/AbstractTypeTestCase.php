@@ -85,6 +85,7 @@ class AbstractTypeTestCase extends TypeTestCase
 
     /**
      * @param \PHPUnit_Framework_MockObject_MockObject|ValidatorInterface $validator
+     *
      * @return AbstractTypeTestCase
      */
     protected function setValidator($validator): AbstractTypeTestCase

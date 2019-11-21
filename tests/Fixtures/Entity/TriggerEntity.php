@@ -16,6 +16,7 @@ class TriggerEntity
 
     /**
      * @param bool $check
+     *
      * @return TriggerEntity
      */
     public function setCheck(bool $check)
