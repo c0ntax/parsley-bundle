@@ -1,6 +1,6 @@
 {
     "name": "c0ntax/parsley-bundle",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "type": "symfony-bundle",
     "description": "A bridge between Symfony and Parsley.js",
     "license": "Apache-2.0",
